@@ -104,6 +104,38 @@ input {
   pointer-events: none;
 }
 
+.stage-track {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+
+.stage-track-item {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  border: 1px solid var(--muted);
+  color: var(--muted);
+  background-color: transparent;
+  opacity: 0.4;
+  transition: opacity 300ms ease, background-color 300ms ease, color 300ms ease;
+}
+
+.stage-track-item.covered {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: var(--paper);
+  opacity: 1;
+}
+
+.stage-track-item.current {
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
 .stage-badge {
   display: inline-block;
   background-color: var(--accent);

@@ -1,7 +1,24 @@
 import { useState } from 'react'
-import { validateResponse } from '../../contract.js'
+import { STAGES, validateResponse } from '../../contract.js'
 
 const API_BASE = import.meta.env.VITE_API_URL || ''
+
+function StageTrack({ stage }) {
+    const currentIndex = STAGES.indexOf(stage)
+
+    return (
+        <div className="stage-track">
+            {STAGES.map((s, i) => (
+                <div
+                    key={s}
+                    className={`stage-track-item ${i <= currentIndex ? 'covered' : 'disabled'} ${i === currentIndex ? 'current' : ''}`}
+                >
+                    {s}
+                </div>
+            ))}
+        </div>
+    )
+}
 
 export default function App() {
     const [screen, setScreen] = useState('setup')
@@ -139,6 +156,7 @@ export default function App() {
 
             {screen === 'action' && current && (
                 <div className="screen">
+                    <StageTrack stage={current.stage} />
                     <div className="stage-badge">{current.stage}</div>
                     <h2>{growing}</h2>
 
