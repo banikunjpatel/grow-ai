@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { validateResponse } from '../../contract.js'
 
+const API_BASE = import.meta.env.VITE_API_URL || ''
+
 export default function App() {
     const [screen, setScreen] = useState('setup')
     const [growing, setGrowing] = useState('')
@@ -22,7 +24,7 @@ export default function App() {
 
         setLoading(true)
         try {
-            const res = await fetch('/api/grow', {
+            const res = await fetch(`${API_BASE}/api/grow`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ growing, blocker, history: [] })
@@ -57,7 +59,7 @@ export default function App() {
 
         try {
             const newHistory = [...history, { stage: current.stage, action: current.action, reflection }]
-            const res = await fetch('/api/grow', {
+            const res = await fetch(`${API_BASE}/api/grow`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ growing, blocker, history: newHistory })
